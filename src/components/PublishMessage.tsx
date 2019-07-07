@@ -1,14 +1,11 @@
-import React, { useState, Dispatch, KeyboardEvent } from 'react';
+import React, { useState, Dispatch, KeyboardEvent, useContext, SetStateAction } from 'react';
+import Context from '../context';
 import { newMessage } from "../state/actions";
 import { IAction } from "../typescriptTypes/IAction";
 
-interface IProps {
-    dispatch: Dispatch<IAction>
-}
-
-const PublishMessage: React.FC<IProps> = ( props ) => {
-    const { dispatch } = props;
-    const [ text, setText ] = useState( '' );
+const PublishMessage: React.FC = () => {
+    const {dispatch}: {dispatch: Dispatch<IAction>} = useContext(Context);
+    const [ text, setText ]: [string, Dispatch<string>] = useState( '' );
     
     const publishMessage = () => {
         dispatch( newMessage( text ) );
